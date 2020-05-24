@@ -1,4 +1,4 @@
-#Ballerina benchmarks
+# Ballerina benchmarks
 
 To build and run testing containers run `setup.sh`. 
 
