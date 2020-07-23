@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-duration=10
+duration=1800
 
 
 # Threads 1
