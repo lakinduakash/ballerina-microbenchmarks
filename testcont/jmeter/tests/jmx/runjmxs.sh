@@ -26,3 +26,5 @@ echo "Running tests for 20 threads"
 /usr/share/apache-jmeter-5.2.1/bin/jmeter --forceDeleteResultFile -n -t /usr/tests/jmx/Test_Plan_Memory.jmx -Jthreads=20 -Jduration=${duration} -Jramp_time=3 -l results_memory_20.jtl -e -o "reports_memory_20"
 #/usr/share/apache-jmeter-5.2.1/bin/jmeter --forceDeleteResultFile -n -t /usr/tests/jmx/Test_Plan_IO_5.jmx -Jthreads=20 -Jduration=${duration} -Jramp_time=3 -l results_io_20.jtl -e -o "reports_io_20"
 echo "#########################"
+
+tar -czf results_$(date +'%Y%m%d_%H%M%S').tar.gz *
