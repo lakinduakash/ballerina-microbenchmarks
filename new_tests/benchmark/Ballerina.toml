@@ -1,0 +1,15 @@
+[project]
+org-name= "lakindu"
+version= "0.1.0"
+
+[dependencies]
+
+[platform]
+target = "java8"
+
+    [[platform.libraries]]
+    artafactId = "mysql-connector-java"
+    version = "8.0.19"
+    path = "jar/mysql-connector-java-8.0.19.jar"
+    groupId = "mysql"
+    modules = ["main"]
