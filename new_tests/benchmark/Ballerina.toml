@@ -7,9 +7,12 @@ version= "0.1.0"
 [platform]
 target = "java8"
 
-    [[platform.libraries]]
-    artafactId = "mysql-connector-java"
-    version = "8.0.19"
-    path = "jar/mysql-connector-java-8.0.19.jar"
-    groupId = "mysql"
-    modules = ["main"]
+[[platform.libraries]]
+artifactId = "mysql-connector-java"
+version = "8.0.19"
+path = "jar/mysql-connector-java-8.0.19.jar"
+groupId = "mysql"
+modules= ["main"]
+
+[build-options]
+observability-included=true
