@@ -7,8 +7,7 @@ ramp_time=1
 split_time=300
 
 jtl_splitter="java -jar /usr/share/jtl-splitter-0.4.5.jar"
-jmeter="/usr/share/apache-jmeter-5.2.1/bin/jmeter"
-
+jmeter="/usr/share/apache-jmeter-5.3/bin/jmeter"
 
 # Is Prime
 
