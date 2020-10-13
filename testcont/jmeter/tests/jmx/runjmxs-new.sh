@@ -15,21 +15,21 @@ jmeter="/usr/share/apache-jmeter-5.3/bin/jmeter"
 echo "Running tests for Is Prime 406423"
 prime=406423
 
-${jmeter} --forceDeleteResultFile -n -t /usr/tests/jmx/Test_Plan_Is_Prime.jmx -Jthreads=1 -Jduration=${duration} -Jramp_time=${ramp_time} -Jparam_number=${prime} -l esults_file_1.jtl
+${jmeter} --forceDeleteResultFile -n -t /usr/tests/jmx/Test_Plan_Is_Prime.jmx -Jthreads=1 -Jduration=${duration} -Jramp_time=${ramp_time} -Jparam_number=${prime} -l results_file_1.jtl
 sleep 5
-${jtl_splitter} -f esults_file_1.jtl -s -u SECONDS -t ${split_time}
+${jtl_splitter} -f results_file_1.jtl -s -u SECONDS -t ${split_time}
 
-${jmeter} --forceDeleteResultFile -n -t /usr/tests/jmx/Test_Plan_Is_Prime.jmx -Jthreads=10 -Jduration=${duration} -Jramp_time=${ramp_time} -Jparam_number=${prime} -l esults_file_10.jtl
+${jmeter} --forceDeleteResultFile -n -t /usr/tests/jmx/Test_Plan_Is_Prime.jmx -Jthreads=10 -Jduration=${duration} -Jramp_time=${ramp_time} -Jparam_number=${prime} -l results_file_10.jtl
 sleep 5
-${jtl_splitter} -f esults_file_10.jtl -s -u SECONDS -t ${split_time}
+${jtl_splitter} -f results_file_10.jtl -s -u SECONDS -t ${split_time}
 
-${jmeter} --forceDeleteResultFile -n -t /usr/tests/jmx/Test_Plan_Is_Prime.jmx -Jthreads=40 -Jduration=${duration} -Jramp_time=${ramp_time} -Jparam_number=${prime} -l esults_file_40.jtl
+${jmeter} --forceDeleteResultFile -n -t /usr/tests/jmx/Test_Plan_Is_Prime.jmx -Jthreads=40 -Jduration=${duration} -Jramp_time=${ramp_time} -Jparam_number=${prime} -l results_file_40.jtl
 sleep 5
-${jtl_splitter} -f esults_file_40.jtl -s -u SECONDS -t ${split_time}
+${jtl_splitter} -f results_file_40.jtl -s -u SECONDS -t ${split_time}
 
-${jmeter} --forceDeleteResultFile -n -t /usr/tests/jmx/Test_Plan_Is_Prime.jmx -Jthreads=80 -Jduration=${duration} -Jramp_time=${ramp_time} -Jparam_number=${prime} -l esults_file_80.jtl
+${jmeter} --forceDeleteResultFile -n -t /usr/tests/jmx/Test_Plan_Is_Prime.jmx -Jthreads=80 -Jduration=${duration} -Jramp_time=${ramp_time} -Jparam_number=${prime} -l results_file_80.jtl
 sleep 5
-${jtl_splitter} -f esults_file_80.jtl -s -u SECONDS -t ${split_time}
+${jtl_splitter} -f results_file_80.jtl -s -u SECONDS -t ${split_time}
 
 
 echo "#########################"
@@ -37,21 +37,21 @@ echo "#########################"
 echo "Running tests for Is Prime 10674959"
 prime=10674959
 
-${jmeter} --forceDeleteResultFile -n -t /usr/tests/jmx/Test_Plan_Is_Prime.jmx -Jthreads=1 -Jduration=${duration} -Jramp_time=${ramp_time} -Jparam_number=${prime} -l esults_file_1.jtl
+${jmeter} --forceDeleteResultFile -n -t /usr/tests/jmx/Test_Plan_Is_Prime.jmx -Jthreads=1 -Jduration=${duration} -Jramp_time=${ramp_time} -Jparam_number=${prime} -l results_file_1.jtl
 sleep 5
-${jtl_splitter} -f esults_file_1.jtl -s -u SECONDS -t ${split_time}
+${jtl_splitter} -f results_file_1.jtl -s -u SECONDS -t ${split_time}
 
-${jmeter} --forceDeleteResultFile -n -t /usr/tests/jmx/Test_Plan_Is_Prime.jmx -Jthreads=10 -Jduration=${duration} -Jramp_time=${ramp_time} -Jparam_number=${prime} -l esults_file_10.jtl
+${jmeter} --forceDeleteResultFile -n -t /usr/tests/jmx/Test_Plan_Is_Prime.jmx -Jthreads=10 -Jduration=${duration} -Jramp_time=${ramp_time} -Jparam_number=${prime} -l results_file_10.jtl
 sleep 5
-${jtl_splitter} -f esults_file_10.jtl -s -u SECONDS -t ${split_time}
+${jtl_splitter} -f results_file_10.jtl -s -u SECONDS -t ${split_time}
 
-${jmeter} --forceDeleteResultFile -n -t /usr/tests/jmx/Test_Plan_Is_Prime.jmx -Jthreads=40 -Jduration=${duration} -Jramp_time=${ramp_time} -Jparam_number=${prime} -l esults_file_40.jtl
+${jmeter} --forceDeleteResultFile -n -t /usr/tests/jmx/Test_Plan_Is_Prime.jmx -Jthreads=40 -Jduration=${duration} -Jramp_time=${ramp_time} -Jparam_number=${prime} -l results_file_40.jtl
 sleep 5
-${jtl_splitter} -f esults_file_40.jtl -s -u SECONDS -t ${split_time}
+${jtl_splitter} -f results_file_40.jtl -s -u SECONDS -t ${split_time}
 
-${jmeter} --forceDeleteResultFile -n -t /usr/tests/jmx/Test_Plan_Is_Prime.jmx -Jthreads=80 -Jduration=${duration} -Jramp_time=${ramp_time} -Jparam_number=${prime} -l esults_file_80.jtl
+${jmeter} --forceDeleteResultFile -n -t /usr/tests/jmx/Test_Plan_Is_Prime.jmx -Jthreads=80 -Jduration=${duration} -Jramp_time=${ramp_time} -Jparam_number=${prime} -l results_file_80.jtl
 sleep 5
-${jtl_splitter} -f esults_file_80.jtl -s -u SECONDS -t ${split_time}
+${jtl_splitter} -f results_file_80.jtl -s -u SECONDS -t ${split_time}
 
 echo "#########################"
 
@@ -94,7 +94,7 @@ ${jmeter} --forceDeleteResultFile -n -t /usr/tests/jmx/Test_Plan_Merge_Sort.jmx 
 sleep 5
 ${jtl_splitter} -f results_merge_sort_80.jtl -s -u SECONDS -t ${split_time}
 
-echo "Running Merger sort"
+echo "Running Db Select"
 
 ${jmeter} --forceDeleteResultFile -n -t /usr/tests/jmx/Test_Plan_Db_Select.jmx -Jthreads=1 -Jduration=${duration} -Jramp_time=${ramp_time} -l results_db_select_1.jtl
 sleep 5
