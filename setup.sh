@@ -12,6 +12,14 @@ docker stop my-mysql-benchmark 2>/dev/null
 docker rm my-mysql-benchmark 2>/dev/null
 docker run --name my-mysql-benchmark -e MYSQL_ROOT_PASSWORD=root@123 -p 3306:3306 -d mysql
 
+echo "mysql server starting..."
+
+while ! docker exec -it my-mysql-benchmark mysql -u root -proot@123  -e ";" &>/dev/null ; do
+       sleep 0.1
+done
+
+echo "mysql server started"
+
 # Download mysql-conector
 if [ ! -f new_tests/benchmark/jar/mysql-connector-java-8.0.19.jar ]; then
     wget https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.19/mysql-connector-java-8.0.19.jar -O new_tests/benchmark/jar/mysql-connector-java-8.0.19.jar
@@ -20,6 +28,6 @@ fi
 cp -rf new_tests testcont/balruntime/new_tests
 cd testcont/balruntime
 docker build . -t bal-benchmark -f bal.Dockerfile
-docker stop bal-benchmark-cont 2 >/dev/null
-docker rm bal-benchmark-cont 2 >/dev/null
+docker stop bal-benchmark-cont 2>/dev/null
+docker rm bal-benchmark-cont 2>/dev/null
 docker run --name bal-benchmark-cont --net="host" -p 9090:9090 --cpus="1" --memory="2g" bal-benchmark
