@@ -6,10 +6,11 @@ import ballerina/mysql;
 
 string dbUser = "root";
 string dbPassword = "root@123";
+string database="testdb";
 
 
 mysql:Client mysqlClient4 = check new ("localhost", dbUser, dbPassword,
-        "information_schema", 3306);
+        database, 3306);
 
 service microbenchmark on new http:Listener(9090) {
 
@@ -92,24 +93,22 @@ service microbenchmark on new http:Listener(9090) {
 		check caller->respond(response);
     }
 
+	resource function db_select(http:Caller caller, http:Request request) returns error? {
+		http:Response response = new;
+		var params = request.getQueryParams();
+		var id = <string>params.get("id")[0];//<string>params.id
+		var query = "SELECT * FROM emp where id = "+id;
 
-	// resource function db(http:Caller caller, http:Request request) returns error? {
-	// 	http:Response response = new;
-	// 	var params = request.getQueryParams();
-	// 	var id = <string>params.get("id")[0];//<string>params.id
-	// 	var query = "SELECT * FROM emp where id = "+id;
-	// 	var selectRet = testDB->select(<@untainted> query, ());
-    
-	// 	if (selectRet is table<record {}>) {
-    //    		//var jsonConversionRet = json.convert(selectRet);
-	// 			json jsonConversionRet = jsonutils:fromTable(selectRet);
-    //    		//io:println("JSON: ", jsonConversionRet.toJsonString());
-    //    		//if (jsonConversionRet is json) {
-	// 			response.setTextPayload(<@untainted> io:sprintf("%s", jsonConversionRet));
-	// 			check caller->respond(response);
-    //    		//}
-    // 		}
-    // 	}
+		stream<record{}, error> resultStream = mysqlClient4->query(<@untainted>query);
+
+		record {|record {} value;|}|error? result = resultStream.next();
+
+    	error? e = resultStream.close();
+
+		response.setTextPayload(<@untainted> io:sprintf("%s", result));
+		check caller->respond(response);
+
+    	}
 
 	resource function file(http:Caller caller, http:Request request) returns @tainted error? {
 		http:Response response = new;
