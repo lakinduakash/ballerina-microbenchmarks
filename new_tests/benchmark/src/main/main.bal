@@ -2,19 +2,14 @@ import ballerina/http;
 import ballerina/io;
 import ballerina/lang.'int as ints;
 import ballerina/time;
-import ballerina/java.jdbc;
+import ballerina/mysql;
 
-//import ballerina/sql;
-// import jdbc/java.jdbc; //note java.jdbc
-// import ballerina/jsonutils;
+string dbUser = "root";
+string dbPassword = "root@123";
 
-// jdbc:Client testDB = new({
-//        url: "jdbc:mysql://localhost:3306/db_example",
-//        username: "root", //"pasindu"
-//        password: "test@123", //"1234"
-//        poolOptions: { maximumPoolSize: 100000},
-//        dbOptions: { useSSL: false }
-//    });
+
+mysql:Client mysqlClient4 = check new ("localhost", dbUser, dbPassword,
+        "information_schema", 3306);
 
 service microbenchmark on new http:Listener(9090) {
 
