@@ -13,4 +13,4 @@ cd testcont/balruntime
 docker build . -t bal-benchmark -f bal.Dockerfile
 docker stop bal-benchmark-cont 2 >/dev/null
 docker rm bal-benchmark-cont 2 >/dev/null
-docker run --name bal-benchmark-cont -p 9090:9090 --cpus="1" --memeory="2g" -d bal-benchmark
+docker run --name bal-benchmark-cont -p 9090:9090 --cpus="1" --memory="2g" -d bal-benchmark
