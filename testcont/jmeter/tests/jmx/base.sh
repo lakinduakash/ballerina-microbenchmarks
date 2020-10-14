@@ -11,7 +11,7 @@ sleep_duration=5
 jtl_splitter="java -jar /usr/share/jtl-splitter-0.4.5.jar"
 jmeter="/usr/share/apache-jmeter-5.3/bin/jmeter"
 
-allThreads=(1 20 40 80)
+allThreads=(1 20 40 80 150 400)
 
 echo "Running tests for Is Prime 406423"
 prime=406423
