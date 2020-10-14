@@ -6,7 +6,7 @@ ramp_time=1
 
 split_time=300
 
-sleep_duration=0
+sleep_duration=5
 
 jtl_splitter="java -jar /usr/share/jtl-splitter-0.4.5.jar"
 jmeter="/usr/share/apache-jmeter-5.3/bin/jmeter"
@@ -83,7 +83,7 @@ for t in ${allThreads[@]}; do
     filename=results_db_select_${t}.jtl
 
     echo ${filename}
-    
+
     ${jmeter} --forceDeleteResultFile -n -t /usr/tests/jmx/Test_Plan_Db_Select.jmx -Jthreads=${t} -Jduration=${duration} -Jramp_time=${ramp_time} -l ${filename}
     sleep ${sleep_duration}
     ${jtl_splitter} -f ${filename} -s -u SECONDS -t ${split_time}
