@@ -24,7 +24,7 @@ sudo usermod -aG docker ${USER}
 
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-sed '/ZSH_THEME=/c ZSH_THEME="crunch"' .zshrc
+sed -i '/ZSH_THEME=/c ZSH_THEME="crunch"' .zshrc
 
 sudo usermod --shell $(which zsh) ${USER}
 
