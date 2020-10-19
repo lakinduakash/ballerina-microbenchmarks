@@ -12,6 +12,6 @@ docker stop jmeter-cont 2>/dev/null
 docker rm jmeter-cont 2>/dev/null
 
 docker build . -t jmeter -f jmeter.Dockerfile
-docker run --mount type=bind,source="$(pwd)"/tests,target=/usr/tests --network host --name jmeter-cont --cpus="1" -d jmeter
+docker run --mount type=bind,source="$(pwd)"/tests,target=/usr/tests --network host --name jmeter-cont --cpus="2" -d jmeter
 
 
