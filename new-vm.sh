@@ -14,7 +14,7 @@ sudo add-apt-repository \
    $(lsb_release -cs) \
    stable"
 
-sudo apt install docker-ce docker-ce-cli containerd.io
+sudo apt install -y docker-ce docker-ce-cli containerd.io
 
 sudo usermod -aG docker ${USER}
 
@@ -23,14 +23,9 @@ sudo usermod -aG docker ${USER}
 
 
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
 sed -i '/ZSH_THEME=/c ZSH_THEME="crunch"' .zshrc
-
 sudo usermod --shell $(which zsh) ${USER}
-
-
 mkdir -p project
 cd project
-
 git clone https://github.com/lakinduakash/ballerina-lang
 git clone https://github.com/lakinduakash/ballerina-microbenchmarks

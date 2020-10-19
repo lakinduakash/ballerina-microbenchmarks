@@ -17,6 +17,9 @@ Download Jmeter
 
 `wget https://downloads.apache.org//jmeter/binaries/apache-jmeter-5.3.tgz && tar -xf tests/jmeter/`
 
+`./gradlew clean --no-build-cache build -x test -x :composer-library:npmBuild -x :testerina:report-tools:updateVersion -x :testerina:report-tools:npmInstall -x check -x generateDocs -x :testerina:report-tools:npmBuild  -x npmBuild --stacktrace`
+
+
 Copy ballerina runtime
 
 `cp -r ~/common-projects/ballerina-lang/distribution/zip/jballerina-tools/build/extracted-distributions/jballerina-tools-2.0.0-SNAPSHOT ~/common-projects/ballerina-microbenchmarks-master/testcont/balruntime/jballerina-tools-2.0.0-SNAPSHOT`
