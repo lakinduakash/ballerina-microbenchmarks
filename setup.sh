@@ -3,7 +3,7 @@
 # Start mysql-server
 docker stop my-mysql-benchmark 2>/dev/null
 docker rm my-mysql-benchmark 2>/dev/null
-docker run --name my-mysql-benchmark -e MYSQL_ROOT_PASSWORD=root@123 -p 3306:3306 -d mysql
+docker run --name my-mysql-benchmark -e MYSQL_ROOT_PASSWORD=root@123 -p 3306:3306 --cpus="2" -d mysql
 
 echo "mysql server starting..."
 
