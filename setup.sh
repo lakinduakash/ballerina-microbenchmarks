@@ -35,4 +35,4 @@ docker rm bal-benchmark-cont 2>/dev/null
 cp -rf new_tests/benchmark testcont/balruntime/benchmark
 cd testcont/balruntime
 docker build . -t bal-benchmark -f bal.Dockerfile
-docker run --name bal-benchmark-cont --net="host" -p 9090:9090 --cpus="2" -d bal-benchmark
+docker run -e "BALLERINA_MAX_POOL_SIZE=10" --name bal-benchmark-cont --net="host" -p 9090:9090 --cpus="2" -d bal-benchmark
