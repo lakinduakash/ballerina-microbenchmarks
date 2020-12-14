@@ -11,7 +11,7 @@ sleep 5
 
 echo "Running tests..."
 
-bash setup-jemeter.sh $t
+bash setup-jmeter.sh $t
 
 echo "finished benchmark with pool size ${t}"
 sleep 5
