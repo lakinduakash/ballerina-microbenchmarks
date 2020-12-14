@@ -38,4 +38,4 @@ curdir=pwd
 cd testcont/balruntime
 docker build . -t bal-benchmark -f bal.Dockerfile
 docker run -e "BALLERINA_MAX_POOL_SIZE=${1}" --name bal-benchmark-cont --net="host" -p 9090:9090 --cpus="2" -d bal-benchmark
-cd curdir
+cd $curdir
