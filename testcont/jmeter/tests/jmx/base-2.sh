@@ -20,7 +20,7 @@ prime=521
 
 for t in ${allThreads[@]}; do
 
-    filename=${POOL_SIZE}_results_is_prime_small_${t}.jtl
+    filename=results_${POOL_SIZE}_is_prime_small_${t}.jtl
 
     echo ${filename}
 
@@ -39,7 +39,7 @@ prime=7919
 
 for t in ${allThreads[@]}; do
 
-    filename=${POOL_SIZE}_results_is_prime_medium_${t}.jtl
+    filename=results_${POOL_SIZE}_is_prime_medium_${t}.jtl
 
     echo ${filename}
 
@@ -58,7 +58,7 @@ echo "Running tests for db select"
 
 for t in ${allThreads[@]}; do
 
-    filename=${POOL_SIZE}_results_db_select_${t}.jtl
+    filename=results_${POOL_SIZE}_db_select_${t}.jtl
 
     echo ${filename}
 
