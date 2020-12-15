@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pool_sizes=(2 4 10 50 75)
+pool_sizes=(2 4 10 25 50 80)
 
 for t in ${pool_sizes[@]}; do
 

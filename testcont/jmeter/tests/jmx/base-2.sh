@@ -15,7 +15,7 @@ allThreads=(1 10 20 50 100)
 
 echo "Starting test for thread pool size ${POOL_SIZE}"
 
-echo "Running tests for Is Prime 406423"
+echo "Running tests for Is Prime 521"
 prime=521
 
 for t in ${allThreads[@]}; do
