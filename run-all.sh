@@ -7,7 +7,7 @@ for t in ${pool_sizes[@]}; do
 echo "Setting pool size ${t}"
 
 bash setup.sh $t
-sleep 5
+sleep 10
 
 echo "Running tests..."
 
