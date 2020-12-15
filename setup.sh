@@ -19,6 +19,7 @@ INSERT INTO testdb.emp (id, firstName) VALUES (1, 'Lakindu Akash');"
 
 while ! docker exec -it my-mysql-benchmark mysql -u root -proot@123  -e "${sql_query}" &>/dev/null; do
        sleep 0.1
+       echo "..."
 done
 
 echo "mysql server started"

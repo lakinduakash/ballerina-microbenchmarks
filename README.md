@@ -28,3 +28,6 @@ Copy ballerina runtime
 
 `cp -fr --remove-destination ~/project/ballerina-lang/distribution/zip/jballerina-tools/build/extracted-distributions/jballerina-tools-2.0.0-SNAPSHOT ~/project/ballerina-microbenchmarks/testcont/balruntime/jballerina-tools-2.0.0-SNAPSHOT`
 
+Background script 
+
+`nohup myprogram > foo.out 2> foo.err < /dev/null &`
