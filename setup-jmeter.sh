@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-curdir= $(pwd)
+curdir=$(pwd)
 cd testcont/jmeter
 
 # Download jmeter
