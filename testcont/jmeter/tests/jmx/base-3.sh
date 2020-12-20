@@ -24,7 +24,7 @@ for t in ${allThreads[@]}; do
     request_path="microbenchmark/cpudb"
 
     param_1_name="number"
-    param_1_value="10"
+    param_1_value="7919"
 
     param_2_name="id"
     param_2_value="1"
@@ -51,6 +51,9 @@ for t in ${allThreads[@]}; do
 
     param_1_name="number"
     param_1_value="7919"
+
+    param_2_name="id"
+    param_2_value="1"
 
     echo ${filename}
 
