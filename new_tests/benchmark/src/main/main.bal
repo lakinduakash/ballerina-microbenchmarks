@@ -145,4 +145,120 @@ service microbenchmark on new http:Listener(9090) {
 		response.setTextPayload(<@untainted> io:sprintf("%s", array.length()));
 		check caller->respond(response);
     	}
+
+	resource function cpudb(http:Caller caller, http:Request request) returns error? {
+
+		http:Response response = new;
+		var params = request.getQueryParams();
+
+		int number=check ints:fromString(params.get("number")[0]);
+		boolean is_prime = false;
+
+		boolean flag=false;
+
+		foreach var i in 2...(number/2) {
+				
+				if (number % i) == 0{
+					flag=true;
+					break;
+				}
+			}
+
+		if(number == 1){
+			is_prime=true;
+		}
+		else {
+        	if (!flag){
+				is_prime=true;
+			}
+			else{
+				is_prime=false;
+			}
+    	}
+
+		var id = <string>params.get("id")[0];//<string>params.id
+		var query = "SELECT * FROM emp where id = "+id;
+
+		stream<record{}, error> resultStream = mysqlClient4->query(<@untainted>query);
+
+		record {|record {} value;|}|error? result = resultStream.next();
+
+    	error? e = resultStream.close();
+
+
+		response.setTextPayload(<@untainted> io:sprintf("%b", is_prime));
+		check caller->respond(response);
+
+	}
+
+	resource function dbcpu(http:Caller caller, http:Request request) returns error? {
+
+		http:Response response = new;
+		var params = request.getQueryParams();
+
+		var id = <string>params.get("id")[0];//<string>params.id
+		var query = "SELECT * FROM emp where id = "+id;
+
+		stream<record{}, error> resultStream = mysqlClient4->query(<@untainted>query);
+
+		record {|record {} value;|}|error? result = resultStream.next();
+
+    	error? e = resultStream.close();
+
+
+		int number=check ints:fromString(params.get("number")[0]);
+		boolean is_prime = false;
+
+		boolean flag=false;
+
+		foreach var i in 2...(number/2) {
+				
+				if (number % i) == 0{
+					flag=true;
+					break;
+				}
+			}
+
+		if(number == 1){
+			is_prime=true;
+		}
+		else {
+        	if (!flag){
+				is_prime=true;
+			}
+			else{
+				is_prime=false;
+			}
+    	}
+
+
+
+		response.setTextPayload(<@untainted> io:sprintf("%b", is_prime));
+		check caller->respond(response);
+
+	}
+
+	resource function loopdb(http:Caller caller, http:Request request) returns error? {
+
+		http:Response response = new;
+		var params = request.getQueryParams();
+
+		var id = <string>params.get("id")[0];//<string>params.id
+		var query = "SELECT * FROM emp where id = "+id;
+
+		int number=check ints:fromString(params.get("number")[0]);
+
+		record {|record {} value;|}|error? result;
+
+		foreach var i in 0...(number){
+			stream<record{}, error> resultStream = mysqlClient4->query(<@untainted>query);
+
+			result = resultStream.next();
+
+    		error? e = resultStream.close();
+		}
+
+		response.setTextPayload(<@untainted> io:sprintf("%s", result));
+		check caller->respond(response);
+	}
 }
