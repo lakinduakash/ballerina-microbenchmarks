@@ -32,6 +32,7 @@ fi
 docker stop bal-benchmark-cont 2>/dev/null
 docker rm bal-benchmark-cont 2>/dev/null
 
+rm -rf testcont/balruntime/benchmark
 cp -rf new_tests/benchmark testcont/balruntime/benchmark
 
 curdir=$(pwd)
