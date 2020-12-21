@@ -7,13 +7,13 @@ for t in ${pool_sizes[@]}; do
 echo "Setting pool size ${t}"
 
 bash setup.sh $t
-sleep 10
+sleep 8
 
 echo "Running tests..."
 
 bash setup-jmeter.sh $t
 
 echo "finished benchmark with pool size ${t}"
-sleep 5
+sleep 1
 
 done;
