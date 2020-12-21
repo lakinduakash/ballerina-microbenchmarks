@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 #Set duration
-duration=240 # 7 minutes
+duration=420 # 7 minutes
 ramp_time=1
 
-split_time=50
+split_time=120
 
 sleep_duration=5
 
