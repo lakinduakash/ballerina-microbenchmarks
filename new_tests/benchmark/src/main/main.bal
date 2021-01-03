@@ -288,4 +288,33 @@ service microbenchmark on new http:Listener(9090) {
 		}
 		
 	}
+
+	resource function passthrough(http:Caller caller, http:Request request) returns error? {
+
+		
+    	request.addHeader("X-ECHO-CODE", "200");
+
+
+    	var response = nettyEP->forward("/forward",request);
+
+    	if (response is http:Response) {
+			string contentType = response.getHeader("Content-Type");
+			//io:println("Content-Type: " + contentType);
+
+			int statusCode = response.statusCode;
+			//io:println("Status code: " + statusCode.toString());
+
+			check caller->respond(response);
+
+		} else {
+
+			http:Response res = new;
+            res.statusCode = 500;
+            res.setPayload(response.detail()?.message);
+            var result = caller->respond(res);
+			
+			check caller->respond(res);
+		}
+		
+	}
 }
