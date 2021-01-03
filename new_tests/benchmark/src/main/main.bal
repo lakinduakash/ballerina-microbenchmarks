@@ -324,4 +324,105 @@ service microbenchmark on new http:Listener(9090) {
 		}
 		
 	}
+
+	resource function echogetdb(http:Caller caller, http:Request request) returns error? {
+
+		http:Request req = new;
+    	req.addHeader("X-ECHO-CODE", "200");
+
+
+    	var response = nettyEP->get("/get", req) ;
+
+		var params = request.getQueryParams();
+		var id = <string>params.get("id")[0];//<string>params.id
+		var query = "SELECT * FROM emp where id = "+id;
+
+		stream<record{}, error> resultStream = mysqlClient4->query(<@untainted>query);
+
+		record {|record {} value;|}|error? result = resultStream.next();
+
+		error? e = resultStream.close();
+		
+		if (response is http:Response) {
+			response.setTextPayload(<@untainted> io:sprintf("%s", result));
+		}
+
+
+    	if (response is http:Response) {
+			string contentType = response.getHeader("Content-Type");
+			int statusCode = response.statusCode;
+
+			check caller->respond(response);
+			
+		} else {
+			io:println("Error when calling the backend: ",
+			response.detail()?.message);
+
+			http:Response res = new;
+            res.statusCode = 500;
+            res.setPayload(response.detail()?.message);
+
+            check caller->respond(res);
+		}
+		
+	}
+
+
+	resource function echogetcpu(http:Caller caller, http:Request request) returns error? {
+
+		http:Request req = new;
+    	req.addHeader("X-ECHO-CODE", "200");
+
+
+    	var response = nettyEP->get("/get", req);
+
+
+		var params = request.getQueryParams();
+
+		int number=check ints:fromString(params.get("number")[0]);
+		boolean is_prime = false;
+
+		boolean flag=false;
+
+		foreach var i in 2...(number/2) {
+				
+				if (number % i) == 0{
+					flag=true;
+					break;
+				}
+			}
+
+		if(number == 1){
+			is_prime=true;
+		}
+		else {
+        	if (!flag){
+				is_prime=true;
+			}
+			else{
+				is_prime=false;
+			}
+    	}
+
+
+    	if (response is http:Response) {
+			string contentType = response.getHeader("Content-Type");
+			int statusCode = response.statusCode;
+
+			response.setTextPayload(<@untainted> io:sprintf("%b", is_prime));
+			check caller->respond(response);
+			
+		} else {
+			io:println("Error when calling the backend: ",
+			response.detail()?.message);
+
+			http:Response res = new;
+            res.statusCode = 500;
+            res.setPayload(response.detail()?.message);
+            var result = caller->respond(res);
+			
+			check caller->respond(res);
+		}
+		
+	}
 }
