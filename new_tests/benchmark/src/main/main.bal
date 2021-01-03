@@ -278,13 +278,20 @@ service microbenchmark on new http:Listener(9090) {
 
     	if (response is http:Response) {
 			string contentType = response.getHeader("Content-Type");
-			io:println("Content-Type: " + contentType);
-
 			int statusCode = response.statusCode;
-			io:println("Status code: " + statusCode.toString());
+
+			check caller->respond(response);
+			
 		} else {
 			io:println("Error when calling the backend: ",
 			response.detail()?.message);
+
+			http:Response res = new;
+            res.statusCode = 500;
+            res.setPayload(response.detail()?.message);
+            var result = caller->respond(res);
+			
+			check caller->respond(res);
 		}
 		
 	}
