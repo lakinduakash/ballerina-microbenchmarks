@@ -59,8 +59,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
-          <stringProp name="HTTPSampler.port">9090</stringProp>
+          <stringProp name="HTTPSampler.domain">${__P(host_name,localhost)}</stringProp>
+          <stringProp name="HTTPSampler.port">${__P(host_port,9090)}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">${__P(request_path,microbenchmark/cpu)}</stringProp>

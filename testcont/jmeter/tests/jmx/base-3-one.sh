@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #Set duration
-duration=360 # 6 minutes
+duration=300 # 5 minutes
 ramp_time=1
 
 split_time=60
@@ -15,13 +15,13 @@ allThreads=(100)
 
 echo "Starting test for thread pool size ${POOL_SIZE}"
 
-echo "Running tests for cpudb"
+echo "Running tests for echoservice"
 
 for t in ${allThreads[@]}; do
 
-    filename=results_${POOL_SIZE}_cpudb_${t}.jtl
+    filename=results_${POOL_SIZE}_echoget_${t}.jtl
 
-    request_path="microbenchmark/cpudb"
+    request_path="microbenchmark/echoget"
 
     param_1_name="number"
     param_1_value="7919"

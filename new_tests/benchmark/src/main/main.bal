@@ -12,6 +12,12 @@ string database="testdb";
 mysql:Client mysqlClient4 = check new ("localhost", dbUser, dbPassword,
         database, 3306);
 
+http:ClientConfiguration clientConfig = {
+    httpVersion: "2.0"
+};
+
+http:Client nettyEP = new("http://35.184.45.101:80", clientConfig);
+
 service microbenchmark on new http:Listener(9090) {
 
 	resource function cpu(http:Caller caller, http:Request request) returns error? {
@@ -260,5 +266,26 @@ service microbenchmark on new http:Listener(9090) {
 
 		response.setTextPayload(<@untainted> io:sprintf("%s", result));
 		check caller->respond(response);
+	}
+
+	resource function echoget(http:Caller caller, http:Request request) returns error? {
+
+		http:Request req = new;
+    	req.addHeader("X-ECHO-CODE", "200");
+
+
+    	var response = nettyEP->get("/get", req);
+
+    	if (response is http:Response) {
+			string contentType = response.getHeader("Content-Type");
+			io:println("Content-Type: " + contentType);
+
+			int statusCode = response.statusCode;
+			io:println("Status code: " + statusCode.toString());
+		} else {
+			io:println("Error when calling the backend: ",
+			response.detail()?.message);
+		}
+		
 	}
 }
