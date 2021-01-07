@@ -1,22 +1,25 @@
 #!/bin/bash
 
-pool_sizes=(2 3 4 5 6 8 10 12 14 16 18 20)
+pool_sizes=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 22)
 
 #Remove old results
 rm -f testcont/jmeter/tests/results/*.json
 rm -f testcont/jmeter/tests/results/*.jtl
 rm -f testcont/jmeter/tests/results_*
 
+bash jmeter-build-only.sh
+bash ballerina-build-only.sh
+
 for t in ${pool_sizes[@]}; do
 
 echo "Setting pool size ${t}"
 
-bash setup.sh $t
+bash ballerina-run-only.sh $t
 sleep 8
 
 echo "Running tests..."
 
-bash setup-jmeter.sh $t
+bash jmeter-run-only.sh $t
 
 echo "finished benchmark with pool size ${t}"
 sleep 1
