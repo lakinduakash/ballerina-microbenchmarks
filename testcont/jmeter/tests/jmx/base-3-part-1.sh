@@ -67,7 +67,7 @@ done
 
 echo "#########################"
 
-echo "Running tests for loopdb"
+echo "Running tests for loopdb_6"
 
 for t in ${allThreads[@]}; do
 
