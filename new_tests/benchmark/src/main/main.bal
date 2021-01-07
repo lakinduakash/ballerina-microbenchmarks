@@ -268,33 +268,33 @@ service microbenchmark on new http:Listener(9090) {
 		check caller->respond(response);
 	}
 
-	resource function echoget(http:Caller caller, http:Request request) returns error? {
+	// resource function echoget(http:Caller caller, http:Request request) returns error? {
 
-		http:Request req = new;
-    	req.addHeader("X-ECHO-CODE", "200");
+	// 	http:Request req = new;
+    // 	req.addHeader("X-ECHO-CODE", "200");
 
 
-    	var response = nettyEP->get("/get", req);
+    // 	var response = nettyEP->get("/get", req);
 
-    	if (response is http:Response) {
-			string contentType = response.getHeader("Content-Type");
-			int statusCode = response.statusCode;
+    // 	if (response is http:Response) {
+	// 		string contentType = response.getHeader("Content-Type");
+	// 		int statusCode = response.statusCode;
 
-			check caller->respond(response);
+	// 		check caller->respond(response);
 			
-		} else {
-			io:println("Error when calling the backend: ",
-			response.detail()?.message);
+	// 	} else {
+	// 		io:println("Error when calling the backend: ",
+	// 		response.detail()?.message);
 
-			http:Response res = new;
-            res.statusCode = 500;
-            res.setPayload(response.detail()?.message);
-            var result = caller->respond(res);
+	// 		http:Response res = new;
+    //         res.statusCode = 500;
+    //         res.setPayload(response.detail()?.message);
+    //         var result = caller->respond(res);
 			
-			check caller->respond(res);
-		}
+	// 		check caller->respond(res);
+	// 	}
 		
-	}
+	// }
 
 	resource function passthrough(http:Caller caller, http:Request request) returns error? {
 
@@ -325,7 +325,7 @@ service microbenchmark on new http:Listener(9090) {
 		
 	}
 
-	resource function echogetdb(http:Caller caller, http:Request request) returns error? {
+	resource function httpdb(http:Caller caller, http:Request request) returns error? {
 
 		http:Request req = new;
     	req.addHeader("X-ECHO-CODE", "200");
@@ -367,8 +367,52 @@ service microbenchmark on new http:Listener(9090) {
 		
 	}
 
+		resource function dbhttp(http:Caller caller, http:Request request) returns error? {
 
-	resource function echogetcpu(http:Caller caller, http:Request request) returns error? {
+		
+
+		var params = request.getQueryParams();
+		var id = <string>params.get("id")[0];//<string>params.id
+		var query = "SELECT * FROM emp where id = "+id;
+
+		stream<record{}, error> resultStream = mysqlClient4->query(<@untainted>query);
+
+		record {|record {} value;|}|error? result = resultStream.next();
+
+		http:Request req = new;
+    	req.addHeader("X-ECHO-CODE", "200");
+
+
+    	var response = nettyEP->get("/get", req) ;
+
+		error? e = resultStream.close();
+		
+		if (response is http:Response) {
+			response.setTextPayload(<@untainted> io:sprintf("%s", result));
+		}
+
+
+    	if (response is http:Response) {
+			string contentType = response.getHeader("Content-Type");
+			int statusCode = response.statusCode;
+
+			check caller->respond(response);
+			
+		} else {
+			io:println("Error when calling the backend: ",
+			response.detail()?.message);
+
+			http:Response res = new;
+            res.statusCode = 500;
+            res.setPayload(response.detail()?.message);
+
+            check caller->respond(res);
+		}
+		
+	}
+
+
+	resource function httpcpu(http:Caller caller, http:Request request) returns error? {
 
 		http:Request req = new;
     	req.addHeader("X-ECHO-CODE", "200");
@@ -426,34 +470,43 @@ service microbenchmark on new http:Listener(9090) {
 		
 	}
 
-	resource function dbechoget(http:Caller caller, http:Request request) returns error? {
+	resource function loophttploopdb(http:Caller caller, http:Request request) returns error? {
 
 
 		var params = request.getQueryParams();
+		int db_loop_count=check ints:fromString(params.get("db_loop_count")[0]);
+		int http_loop_count=check ints:fromString(params.get("http_loop_count")[0]);
+
 		var id = <string>params.get("id")[0];//<string>params.id
 		var query = "SELECT * FROM emp where id = "+id;
 
-		stream<record{}, error> resultStream = mysqlClient4->query(<@untainted>query);
-
-		record {|record {} value;|}|error? result = resultStream.next();
-
-		error? e = resultStream.close();
-		
-
 		http:Request req = new;
     	req.addHeader("X-ECHO-CODE", "200");
+    	
+		http:Response|error response;
 
+		foreach var i in 0...(http_loop_count){
 
-    	var response = nettyEP->get("/get", req) ;
+			response = nettyEP->get("/get", req) ; // http call
 
-		if (response is http:Response) {
-			response.setTextPayload(<@untainted> io:sprintf("%s", result));
 		}
+		
+		record {|record {} value;|}|error? result;
 
+		foreach var i in 0...(db_loop_count){
+			stream<record{}, error> resultStream = mysqlClient4->query(<@untainted>query); //db call
+
+			result = resultStream.next();
+
+    		error? e = resultStream.close();
+		}
+		
 
     	if (response is http:Response) {
 			string contentType = response.getHeader("Content-Type");
 			int statusCode = response.statusCode;
+
+			response.setTextPayload(<@untainted> io:sprintf("%s", result));
 
 			check caller->respond(response);
 			
