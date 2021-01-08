@@ -501,11 +501,11 @@ service microbenchmark on new http:Listener(9090) {
 		}
 
 		
-		http:Response response = new;
+		http:Response response1 = new;
 
-		response.setTextPayload(<@untainted> io:sprintf("%s", result));
+		response1.setTextPayload(<@untainted> io:sprintf("%s", result));
 
-		check caller->respond(response);
+		check caller->respond(response1);
 
     	// if (response is http:Response) {
 		// 	string contentType = response.getHeader("Content-Type");
