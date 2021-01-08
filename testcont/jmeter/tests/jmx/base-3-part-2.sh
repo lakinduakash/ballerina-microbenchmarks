@@ -11,7 +11,7 @@ sleep_duration=5
 jtl_splitter="java -jar /usr/share/jtl-splitter-0.4.5.jar"
 jmeter="/usr/share/apache-jmeter-5.3/bin/jmeter"
 
-allThreads=(100)
+allThreads=(80)
 
 echo "Starting test for thread pool size ${POOL_SIZE}"
 
@@ -138,7 +138,7 @@ for t in ${allThreads[@]}; do
 
     filename=results_${POOL_SIZE}_httpcpu_large_${t}.jtl
 
-    request_path="microbenchmark/http_cpu"
+    request_path="microbenchmark/httpcpu"
 
     param_1_name="number"
     param_1_value="7919"
@@ -165,7 +165,7 @@ for t in ${allThreads[@]}; do
 
     filename=results_${POOL_SIZE}_httpcpu_small_${t}.jtl
 
-    request_path="microbenchmark/http_cpu"
+    request_path="microbenchmark/httpcpu"
 
     param_1_name="number"
     param_1_value="541"
