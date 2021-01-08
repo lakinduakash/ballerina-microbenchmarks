@@ -16,7 +16,7 @@ http:ClientConfiguration clientConfig = {
     httpVersion: "2.0"
 };
 
-http:Client nettyEP = new("http://35.184.45.101:80", clientConfig);
+http:Client nettyEP = new("http://34.69.148.194:80", clientConfig);
 
 service microbenchmark on new http:Listener(9090) {
 
