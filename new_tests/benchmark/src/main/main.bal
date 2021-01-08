@@ -367,7 +367,7 @@ service microbenchmark on new http:Listener(9090) {
 		
 	}
 
-		resource function dbhttp(http:Caller caller, http:Request request) returns error? {
+	resource function dbhttp(http:Caller caller, http:Request request) returns error? {
 
 		
 
