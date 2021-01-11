@@ -547,4 +547,86 @@ service microbenchmark on new http:Listener(9090) {
 		// }
 		
 	}
+
+
+	resource function loopdbloophttp(http:Caller caller, http:Request request) returns error? {
+
+
+		var params = request.getQueryParams();
+		int db_loop_count=check ints:fromString(params.get("db_loop_count")[0]);
+		int http_loop_count=check ints:fromString(params.get("http_loop_count")[0]);
+
+		var id = <string>params.get("id")[0];//<string>params.id
+		var query = "SELECT * FROM emp where id = "+id;
+			
+
+		record {|record {} value;|}|error? result;
+
+		foreach var i in 0...(db_loop_count){
+			stream<record{}, error> resultStream = mysqlClient4->query(<@untainted>query); //db call
+
+			result = resultStream.next();
+
+    		error? e = resultStream.close();
+		}
+
+
+		http:Request req = new;
+    	req.addHeader("X-ECHO-CODE", "200");
+    	
+		boolean errored =false;
+
+		string? errorDetails ="";
+
+		foreach var i in 0...(http_loop_count){
+
+			var response = nettyEP->get("/get", req) ; // http call
+
+			if(! (response is http:Response) ){
+				errored=true;
+				errorDetails = response.detail()?.message;
+			}
+			
+		}
+
+		if(errored){
+				io:println("Error when calling the backend: ",
+				errorDetails);
+
+				http:Response res = new;
+            	res.statusCode = 500;
+
+            	check caller->respond(res);
+
+				return;
+		}
+
+		http:Response response1 = new;
+
+		response1.setTextPayload(<@untainted> io:sprintf("%s", result));
+
+		check caller->respond(response1);
+		
+		
+
+    	// if (response is http:Response) {
+		// 	string contentType = response.getHeader("Content-Type");
+		// 	int statusCode = response.statusCode;
+
+		// 	response.setTextPayload(<@untainted> io:sprintf("%s", result));
+
+		// 	check caller->respond(response);
+			
+		// } else {
+		// 	io:println("Error when calling the backend: ",
+		// 	response.detail()?.message);
+
+		// 	http:Response res = new;
+        //     res.statusCode = 500;
+        //     res.setPayload(response.detail()?.message);
+
+        //     check caller->respond(res);
+		// }
+		
+	}
 }
