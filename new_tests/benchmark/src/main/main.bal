@@ -483,11 +483,33 @@ service microbenchmark on new http:Listener(9090) {
 		http:Request req = new;
     	req.addHeader("X-ECHO-CODE", "200");
     	
+		boolean errored =false;
+
+		string? errorDetails ="";
 
 		foreach var i in 0...(http_loop_count){
 
 			var response = nettyEP->get("/get", req) ; // http call
 
+			if(! (response is http:Response) ){
+				errored=true;
+				errorDetails = response.detail()?.message;
+			}
+			
+		}
+
+		http:Response response1 = new;
+
+		if(errored){
+				io:println("Error when calling the backend: ",
+				errorDetails);
+
+				http:Response res = new;
+            	res.statusCode = 500;
+
+            	check caller->respond(res);
+
+				return;
 		}
 		
 		record {|record {} value;|}|error? result;
@@ -500,8 +522,6 @@ service microbenchmark on new http:Listener(9090) {
     		error? e = resultStream.close();
 		}
 
-		
-		http:Response response1 = new;
 
 		response1.setTextPayload(<@untainted> io:sprintf("%s", result));
 
