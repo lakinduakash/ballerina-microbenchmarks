@@ -14,6 +14,7 @@ for t in ${pool_sizes[@]}; do
 
 echo "Setting pool size ${t}"
 
+bash ballerina-build-only.sh
 bash ballerina-run-only.sh $t
 sleep 8
 
