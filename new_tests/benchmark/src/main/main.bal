@@ -13,7 +13,8 @@ mysql:Client mysqlClient4 = check new ("localhost", dbUser, dbPassword,
         database, 3306);
 
 http:ClientConfiguration clientConfig = {
-    httpVersion: "2.0"
+    httpVersion: "1.1",
+	poolConfig: {}
 };
 
 http:Client nettyEP = new("http://34.69.148.194:80", clientConfig);
