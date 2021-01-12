@@ -133,7 +133,7 @@ service microbenchmark on new http:Listener(9090) {
 	resource function io(http:Caller caller, http:Request request) returns error? {
 		http:Response response = new;
 		var params = request.getQueryParams();
-		var message = <string>params.get("message")[0];
+		var message = <string>params.get("number")[0];
 		response.setTextPayload(<@untainted> message);
 		check caller->respond(response);
     	}
