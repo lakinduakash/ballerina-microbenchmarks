@@ -240,7 +240,7 @@ for t in ${allThreads[@]}; do
 done
 
 echo "ssh into bal-benchmark"
-ssh -i /usr/tests/localssh sigmdev@localhost "docker stop bal-benchmark-cont 2>/dev/null; docker start bal-benchmark 2>/dev/null"
+ssh -o "StrictHostKeyChecking no" -i /usr/tests/localssh sigmdev@localhost  "docker stop bal-benchmark-cont 2>/dev/null; docker start bal-benchmark 2>/dev/null"
 
 echo "#########################"
 
@@ -273,7 +273,7 @@ for t in ${allThreads[@]}; do
 done
 
 echo "ssh into bal-benchmark"
-ssh -i /usr/tests/localssh sigmdev@localhost "docker stop bal-benchmark-cont 2>/dev/null; docker start bal-benchmark 2>/dev/null"
+ssh -o "StrictHostKeyChecking no" -i /usr/tests/localssh sigmdev@localhost  "docker stop bal-benchmark-cont 2>/dev/null; docker start bal-benchmark 2>/dev/null"
 
 echo "#########################"
 
@@ -306,7 +306,7 @@ for t in ${allThreads[@]}; do
 done
 
 echo "ssh into bal-benchmark"
-ssh -i /usr/tests/localssh sigmdev@localhost "docker stop bal-benchmark-cont 2>/dev/null; docker start bal-benchmark 2>/dev/null"
+ssh -o "StrictHostKeyChecking no" -i /usr/tests/localssh sigmdev@localhost  "docker stop bal-benchmark-cont 2>/dev/null; docker start bal-benchmark 2>/dev/null"
 
 echo "#########################"
 
@@ -339,7 +339,7 @@ for t in ${allThreads[@]}; do
 done
 
 echo "ssh into bal-benchmark"
-ssh -i /usr/tests/localssh sigmdev@localhost "docker stop bal-benchmark-cont 2>/dev/null; docker start bal-benchmark 2>/dev/null"
+ssh -o "StrictHostKeyChecking no" -i /usr/tests/localssh sigmdev@localhost  "docker stop bal-benchmark-cont 2>/dev/null; docker start bal-benchmark 2>/dev/null"
 
 echo "#########################"
 
@@ -371,7 +371,7 @@ for t in ${allThreads[@]}; do
 done
 
 echo "ssh into bal-benchmark"
-ssh -i /usr/tests/localssh sigmdev@localhost "docker stop bal-benchmark-cont 2>/dev/null; docker start bal-benchmark 2>/dev/null"
+ssh -o "StrictHostKeyChecking no" -i /usr/tests/localssh sigmdev@localhost  "docker stop bal-benchmark-cont 2>/dev/null; docker start bal-benchmark 2>/dev/null"
 
 echo "#########################"
 
@@ -404,6 +404,6 @@ for t in ${allThreads[@]}; do
 done
 
 echo "ssh into bal-benchmark"
-ssh -i /usr/tests/localssh sigmdev@localhost "docker stop bal-benchmark-cont 2>/dev/null; docker start bal-benchmark 2>/dev/null"
+ssh -o "StrictHostKeyChecking no" -i /usr/tests/localssh sigmdev@localhost  "docker stop bal-benchmark-cont 2>/dev/null; docker start bal-benchmark 2>/dev/null"
 
 echo "#########################"
