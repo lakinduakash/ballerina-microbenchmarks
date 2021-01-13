@@ -7,15 +7,18 @@ rm -f testcont/jmeter/tests/results/*.json
 rm -f testcont/jmeter/tests/results/*.jtl
 rm -f testcont/jmeter/tests/results_*
 
-bash jmeter-build-only.sh
-bash ballerina-build-only.sh
-
 #keys for localssh access
 ssh-keygen -b 2048 -t rsa -f localssh -q -N ""
 cat localssh.pub >> ~/.ssh/authorized_keys
 chmod og-wx ~/.ssh/authorized_keys
 
 cp localssh testcont/jmeter/tests/localssh
+#End keys
+
+
+bash jmeter-build-only.sh
+bash ballerina-build-only.sh
+
 
 for t in ${pool_sizes[@]}; do
 
@@ -27,8 +30,6 @@ sleep 8
 echo "Running tests..."
 
 bash jmeter-run-only.sh $t
-
-ssh-keygen -b 2048 -t rsa -f sigmdev -q -N ""
 
 echo "finished benchmark with pool size ${t}"
 sleep 1
