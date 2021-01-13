@@ -8,6 +8,7 @@ rm -f testcont/jmeter/tests/results/*.jtl
 rm -f testcont/jmeter/tests/results_*
 
 #keys for localssh access
+rm -f localssh.pub localssh
 ssh-keygen -b 2048 -t rsa -f localssh -q -N ""
 cat localssh.pub >> ~/.ssh/authorized_keys
 chmod og-wx ~/.ssh/authorized_keys
