@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 #Set duration
-duration=300 # 5 minutes
+duration=30 # 5 minutes
 ramp_time=1
 
-split_time=60
+split_time=10
 
 sleep_duration=5
 
@@ -239,6 +239,9 @@ for t in ${allThreads[@]}; do
     rm -f *measurement.jtl
 done
 
+echo "ssh into bal-benchmark"
+ssh -i /usr/tests/localssh sigmdev@localhost "docker stop bal-benchmark-cont 2>/dev/null; docker start bal-benchmark 2>/dev/null"
+
 echo "#########################"
 
 
@@ -268,6 +271,9 @@ for t in ${allThreads[@]}; do
     rm -f *warmup.jtl
     rm -f *measurement.jtl
 done
+
+echo "ssh into bal-benchmark"
+ssh -i /usr/tests/localssh sigmdev@localhost "docker stop bal-benchmark-cont 2>/dev/null; docker start bal-benchmark 2>/dev/null"
 
 echo "#########################"
 
@@ -299,6 +305,9 @@ for t in ${allThreads[@]}; do
     rm -f *measurement.jtl
 done
 
+echo "ssh into bal-benchmark"
+ssh -i /usr/tests/localssh sigmdev@localhost "docker stop bal-benchmark-cont 2>/dev/null; docker start bal-benchmark 2>/dev/null"
+
 echo "#########################"
 
 
@@ -329,6 +338,9 @@ for t in ${allThreads[@]}; do
     rm -f *measurement.jtl
 done
 
+echo "ssh into bal-benchmark"
+ssh -i /usr/tests/localssh sigmdev@localhost "docker stop bal-benchmark-cont 2>/dev/null; docker start bal-benchmark 2>/dev/null"
+
 echo "#########################"
 
 echo "Running tests for http_3"
@@ -357,6 +369,9 @@ for t in ${allThreads[@]}; do
     rm -f *warmup.jtl
     rm -f *measurement.jtl
 done
+
+echo "ssh into bal-benchmark"
+ssh -i /usr/tests/localssh sigmdev@localhost "docker stop bal-benchmark-cont 2>/dev/null; docker start bal-benchmark 2>/dev/null"
 
 echo "#########################"
 
@@ -387,5 +402,8 @@ for t in ${allThreads[@]}; do
     rm -f *warmup.jtl
     rm -f *measurement.jtl
 done
+
+echo "ssh into bal-benchmark"
+ssh -i /usr/tests/localssh sigmdev@localhost "docker stop bal-benchmark-cont 2>/dev/null; docker start bal-benchmark 2>/dev/null"
 
 echo "#########################"
