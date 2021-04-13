@@ -4,10 +4,13 @@ import ballerina/lang.'int as ints;
 import ballerina/time;
 import ballerina/mysql;
 
+import ballerina/grpc;
+
 string dbUser = "root";
 string dbPassword = "root@123";
 string database="testdb";
 
+HelloWorldClient helloWorldEp = new ("http://35.61.144.192:80");
 
 mysql:Client mysqlClient4 = check new ("localhost", dbUser, dbPassword,
         database, 3306);
@@ -629,5 +632,24 @@ service microbenchmark on new http:Listener(9090) {
         //     check caller->respond(res);
 		// }
 		
+	}
+
+
+
+
+resource function grpc_non_blocking_1(http:Caller caller, http:Request request) returns error? {
+    
+
+	int total = 0;
+    grpc:Error? result = helloWorldEp->hello("WSO2", HelloWorldMessageListener);
+
+    if (result is grpc:Error) {
+        io:println("Error from Connector: " + result.reason() + " - "
+                + <string>result.detail()["message"]);
+    } else {
+        io:println("Connected successfully");
+    }
+    while (total == 0) {}
+    io:println("Client got response successfully.");
 	}
 }
